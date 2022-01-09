@@ -5,3 +5,6 @@ html, body {
 padding: 3px;
 margin: 3px;
 }
+.noClick{
+    pointer-events:  none;
+}

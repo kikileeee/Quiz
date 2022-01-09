@@ -1,7 +1,8 @@
 let klikNaDugme = $('#start')[0]
 let klikNaNext = $('.next')[0]
-let brojac = 0
 let pitanjaIOdgovori = []
+let brojac = 0
+let brojPoena = 0
 
 fetch('data.json')
     .then(response => response.json())
@@ -11,6 +12,9 @@ fetch('data.json')
 
 function mapiranje(x) {
 
+    for (i = 1; i < 5; i++) {
+        $('.q' + i)[0].classList.remove("bg-success", "bg-danger", "border-dark", "noClick")
+    }
     let promesanibrojevi = [1, 2, 3, 4]
     let probro = promesanibrojevi
         .map((value) => ({ value, sort: Math.random() }))
@@ -41,21 +45,46 @@ function zapocniTest() {
     $('#start')[0].style.display = 'none'
 }
 
-
-
 klikNaNext.addEventListener('click', nextFunkcija)
-
 function nextFunkcija() {
+    if (pitanjaIOdgovori[brojac] == undefined){
+        krajKviza()
+    }
+    else { 
     mapiranje(pitanjaIOdgovori)
+    }
 }
 
 $('.q').click(function () {
-    if (this.innerHTML == pitanjaIOdgovori[brojac - 1].tacanOdg) {
-        console.log('tacan odgovor')
-        let element = this
+
+    let element = this
+    let textNode = element.firstChild
+    let URI = textNode.data
+    $('.q').each(function(){
+        this.classList.add('noClick')}
+    )
+    if (URI == pitanjaIOdgovori[brojac - 1].tacanOdg) {
         element.classList.add("bg-success");
         element.classList.add("border-dark");
-        console.log(element)
+        brojPoena++
+    }
+    else {
+        element.classList.add("bg-danger");
+        element.classList.add("border-dark");
+        brojPoena--
+        console.log('trenutno broj poena je ' + brojPoena)
     }
 }
 )
+
+function krajKviza() {
+    $('.next')[0].classList.add('d-none')
+    $('.q').each(function(){
+        this.classList.add('d-none')
+    })
+    $('.pitanje')[0].innerHTML = 'Ukupno se sakupili ' + brojPoena + ' bodova, cestitamo!'
+    $('#start')[0].style.display = 'block'
+    $('#start')[0].innerHTML = 'Ponovite test'
+    brojac = 0
+    brojPoena = 0
+}

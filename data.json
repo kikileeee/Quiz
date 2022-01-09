@@ -33,4 +33,42 @@
         "pogresanOdg1": 2,
         "pogresanOdg2": 5,
         "pogresanOdg3": 1
-    }]
+    },
+    {
+        "pitanje": "Odredite vrednost izraza u novčanicama Republike Srbije: Milutin + Jovan - Đorđe - Nikola + Nadežda =",
+        "tacanOdg": "1600 dinara",
+        "pogresanOdg1": "2400 dinara",
+        "pogresanOdg2": "1800 dinara",
+        "pogresanOdg3": "2000 dinara"
+    },
+    {
+        "pitanje": "Koji od kraljeva u kartama za igru nema brkove?",
+        "tacanOdg": "Herc",
+        "pogresanOdg1": "Pik",
+        "pogresanOdg2": "Karo",
+        "pogresanOdg3": "Svi imaju brkove"
+    },
+    {
+        "pitanje": "Ako znamo da je neka sredina bazna, njena pH vrednost će biti:",
+        "tacanOdg": "pH>7",
+        "pogresanOdg1": "pH=7",
+        "pogresanOdg2": "pH<7",
+        "pogresanOdg3": "pH<0.7"
+    },
+    {
+        "pitanje": "Mitološko biće koje je imalo kozje telo, zmijski rep te lavlju glavu naziva se:",
+        "tacanOdg": "Himera",
+        "pogresanOdg1": "Satir",
+        "pogresanOdg2": "Kerber",
+        "pogresanOdg3": "Meduza"
+    },
+    {
+        "pitanje": "Ako u vakuumu, sa visine od 3 metra bacimo istovremeno metalni novčić, olovku, mobilni telefon i pero, šta će najbrže pasti na tlo?",
+        "tacanOdg": "Nista od navedenog",
+        "pogresanOdg1": "Olovka",
+        "pogresanOdg2": "Mobilni telefon",
+        "pogresanOdg3": "Pero"
+    }
+    
+
+]
