@@ -43,6 +43,8 @@ function zapocniTest() {
     $('.next').removeClass('d-none').show()
     $('#start')[0].style.display = 'none'
     $('.poljeSaPoenima')[0].classList.add('d-none')
+    $('.pisanjeNadimka')[0].classList.add('d-none')
+    $('.ime')[0].value = ''
 
     mapiranje(promesajNiz)
 };
@@ -84,12 +86,13 @@ function krajKviza() {
     $('.poljeSaPoenima')[0].classList.remove('d-none')
     $('.q').each(function () {
         this.classList.add('d-none')
+        $('.pisanjeNadimka')[0].classList.remove('d-none')
     })
     if (brojPoena > 0) {
-        $('.pitanje')[0].innerHTML = 'Ukupno se sakupili ' + brojPoena + ' bodova, cestitamo!'
+        $('.pitanje')[0].innerHTML = 'Vas skor je ' + brojPoena + ' , cestitamo! </br> Mozete da ponovite test!'
     }
     else {
-        $('.pitanje')[0].innerHTML = 'Nazalost imate ' + brojPoena + ' bodova, vise srece drugi put!'
+        $('.pitanje')[0].innerHTML = 'Nazalost vas skor je ' + brojPoena + ' , vise srece drugi put! </br> Mozete da ponovite test!'
     }
     $('.ponovite')[0].classList.remove('d-none')
 };
@@ -112,6 +115,8 @@ $('.unosenjeSkora').click(function () {
             loadHighScore()
         }
     }
+    
+    $('.pisanjeNadimka')[0].classList.add('d-none')
 });
 
 // ponavljanje testa
@@ -127,6 +132,7 @@ $('.ponovite').click(function () {
 function loadHighScore() {
     tabelaHighScore.sort((a, b) => b.skor - a.skor)
     for (i = 0; i < tabelaHighScore.length; i++) {
+        if (i < 9){
         let tr = document.createElement('tr')
         let th1 = document.createElement('th')
         let td2 = document.createElement('td')
@@ -140,7 +146,7 @@ function loadHighScore() {
         td2.append(imeTR)
         td3.append(poeniTR)
         $('.tabelaSaPoenima')[0].append(tr)
-    }
+    }}
 };
 
 loadHighScore();

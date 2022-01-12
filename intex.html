@@ -2,62 +2,64 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <title>Kviz</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <title>Kviz</title>
 </head>
 
 <body class="d-flex">
   <div class="container d-flex ">
-            <div class="card m-auto text-center ">
-                <div class="card-body centar home">
-                  <h5 class="card-title">Kviz znanja</h5>
-                  <p class="card-text pitanje">
-                    Pravila igre: <br>
-                    Za svaki tacan odgovor dobija se 1 poen. <br>
-                    Za svaki ne tacan odgovor gubi se 3 poena. <br>
-                    Pristisnite Start da zapocnete kviz 
-                  </p>
-                  <a href="#"  class="btn btn-primary q1 q d-none p-2">Button</a>
-                  <a href="#"  class="btn btn-primary q2 q d-none p-2">Button</a>
-                  <a href="#"  class="btn btn-primary q3 q d-none p-2">Button</a>
-                  <a href="#"  class="btn btn-primary q4 q d-none p-2">Button</a>
-                  <a href="#" id="start" class="btn btn-primary p-2">Start</a>
-                  <a href="#" id="start" class="btn btn-primary p-2 d-none ponovite">Ponovite test</a>
-                  <a href="#" class="btn btn-primary q4 next d-none p-2">Sledece pitanje</a>
-                  <div class="poljeSaPoenima">
-                    <br>
-                    <div class="input-group mb-3">
-                      <input type="text" class="form-control ime" placeholder="Upisite vas nadimak" >
-                      <div class="input-group-append">
-                        <button class="btn btn-primary unosenjeSkora" type="button">Unesite skor</button>
-                      </div>
-                    </div>
-                    <br>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Ime</th>
-                          <th scope="col">Broj Poena</th>
-                        </tr>
-                      </thead>
-                      <tbody class='tabelaSaPoenima' id='tabelaSaPoenima'>
-                        <tr>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div> 
+    <div class="card m-auto text-center ">
+      <div class="card-body centar home">
+        <h5 class="card-title">Kviz znanja</h5>
+        <p class="card-text pitanje">
+          Pravila igre: <br>
+          Za svaki tacan odgovor dobija se 1 poen. <br>
+          Za svaki netacan odgovor gubi se 3 poena. <br>
+          Pristisnite Start da zapocnete kviz!
+        </p>
+        <a href="#" class="btn btn-primary q1 q d-none p-2">Button</a>
+        <a href="#" class="btn btn-primary q2 q d-none p-2">Button</a>
+        <a href="#" class="btn btn-primary q3 q d-none p-2">Button</a>
+        <a href="#" class="btn btn-primary q4 q d-none p-2">Button</a>
+        <a href="#" id="start" class="btn btn-primary p-2">Start</a>
+        <a href="#" id="start" class="btn btn-primary p-2 d-none ponovite">Ponovite test</a>
+        <br>
+        <a href="#" class="btn btn-primary q4 next d-none p-2">Sledece pitanje</a>
+        <div class="poljeSaPoenima">
+          <br>
+          <div class="input-group mb-3 d-none pisanjeNadimka">
+            <input type="text" class="form-control ime" placeholder="Upisite vas nadimak">
+            <div class="input-group-append">
+              <button class="btn btn-primary unosenjeSkora" type="button">Unesite skor</button>
+            </div>
+          </div>
+          <br>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ime</th>
+                <th scope="col">Broj Poena</th>
+              </tr>
+            </thead>
+            <tbody class='tabelaSaPoenima' id='tabelaSaPoenima'>
+              <tr>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-</div>  
+  </div>
 </body>
 <script type="text/javascript" src="data.json"></script>
 <script src="/js/script.js"></script>
+
 </html>
