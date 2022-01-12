@@ -1,15 +1,15 @@
-let klikNaDugme = $('#start')[0]
-let klikNaNext = $('.next')[0]
-let pitanjaIOdgovori = []
-let brojac = 0
-let brojPoena = 0
+let pitanjaIOdgovori = [];
+let brojac = 0;
+let brojPoena = 0;
+let tabelaHighScore = JSON.parse(localStorage.getItem('tabelaHighScore')) || [];
 
+// Baza sa pitanjima i odgovorima
 fetch('data.json')
     .then(response => response.json())
     .then(json =>
         pitanjaIOdgovori = json
     );
-
+// Nasumicno postavljanje pitanja
 function mapiranje(x) {
 
     for (i = 1; i < 5; i++) {
@@ -27,9 +27,9 @@ function mapiranje(x) {
     $('.q' + probro[2])[0].innerText = x[brojac].pogresanOdg2
     $('.q' + probro[3])[0].innerText = x[brojac].pogresanOdg3
     brojac++
-}
-
-klikNaDugme.addEventListener('click', zapocniTest)
+};
+// Pocetak testa
+$('#start')[0].addEventListener('click', zapocniTest)
 
 function zapocniTest() {
     let promesajNiz = pitanjaIOdgovori
@@ -38,30 +38,33 @@ function zapocniTest() {
         .map(({ value }) => value)
 
     pitanjaIOdgovori = promesajNiz
-    mapiranje(promesajNiz)
 
     $('.q').removeClass('d-none').show()
     $('.next').removeClass('d-none').show()
     $('#start')[0].style.display = 'none'
-}
+    $('.poljeSaPoenima')[0].classList.add('d-none')
 
-klikNaNext.addEventListener('click', nextFunkcija)
+    mapiranje(promesajNiz)
+};
+// Sledece pitanje
+$('.next')[0].addEventListener('click', nextFunkcija)
 function nextFunkcija() {
-    if (pitanjaIOdgovori[brojac] == undefined){
+    if (pitanjaIOdgovori[brojac] == undefined) {
         krajKviza()
     }
-    else { 
-    mapiranje(pitanjaIOdgovori)
+    else {
+        mapiranje(pitanjaIOdgovori)
     }
-}
-
+};
+// Provera tacnosti odgovora
 $('.q').click(function () {
 
     let element = this
     let textNode = element.firstChild
     let URI = textNode.data
-    $('.q').each(function(){
-        this.classList.add('noClick')}
+    $('.q').each(function () {
+        this.classList.add('noClick')
+    }
     )
     if (URI == pitanjaIOdgovori[brojac - 1].tacanOdg) {
         element.classList.add("bg-success");
@@ -71,20 +74,73 @@ $('.q').click(function () {
     else {
         element.classList.add("bg-danger");
         element.classList.add("border-dark");
-        brojPoena--
+        brojPoena -= 3
         console.log('trenutno broj poena je ' + brojPoena)
     }
-}
-)
-
+});
+// Kraj Kviza
 function krajKviza() {
     $('.next')[0].classList.add('d-none')
-    $('.q').each(function(){
+    $('.poljeSaPoenima')[0].classList.remove('d-none')
+    $('.q').each(function () {
         this.classList.add('d-none')
     })
-    $('.pitanje')[0].innerHTML = 'Ukupno se sakupili ' + brojPoena + ' bodova, cestitamo!'
-    $('#start')[0].style.display = 'block'
-    $('#start')[0].innerHTML = 'Ponovite test'
+    if (brojPoena > 0) {
+        $('.pitanje')[0].innerHTML = 'Ukupno se sakupili ' + brojPoena + ' bodova, cestitamo!'
+    }
+    else {
+        $('.pitanje')[0].innerHTML = 'Nazalost imate ' + brojPoena + ' bodova, vise srece drugi put!'
+    }
+    $('.ponovite')[0].classList.remove('d-none')
+};
+// unosenje podataka u localstorage
+$('.unosenjeSkora').click(function () {
+    let imeIgraca = $('.ime')[0].value
+    if (imeIgraca == '') { }
+    else {
+        if (brojPoena > 0) {
+            let igrac = {
+                ime: imeIgraca,
+                skor: brojPoena
+            }
+            tabelaHighScore.push(igrac)
+            localStorage.setItem('tabelaHighScore', JSON.stringify(tabelaHighScore))
+            const parent = document.getElementById("tabelaSaPoenima")
+            while (parent.firstChild) {
+                parent.firstChild.remove()
+            }
+            loadHighScore()
+        }
+    }
+});
+
+// ponavljanje testa
+
+$('.ponovite').click(function () {
     brojac = 0
     brojPoena = 0
-}
+    zapocniTest()
+});
+
+// vadjenje podataka iz localstoraga
+
+function loadHighScore() {
+    tabelaHighScore.sort((a, b) => b.skor - a.skor)
+    for (i = 0; i < tabelaHighScore.length; i++) {
+        let tr = document.createElement('tr')
+        let th1 = document.createElement('th')
+        let td2 = document.createElement('td')
+        let td3 = document.createElement('td')
+        let imeTR = document.createTextNode(tabelaHighScore[i].ime)
+        let poeniTR = document.createTextNode(tabelaHighScore[i].skor)
+        tr.append(th1)
+        tr.append(td2)
+        tr.append(td3)
+        th1.append(i + 2)
+        td2.append(imeTR)
+        td3.append(poeniTR)
+        $('.tabelaSaPoenima')[0].append(tr)
+    }
+};
+
+loadHighScore();
