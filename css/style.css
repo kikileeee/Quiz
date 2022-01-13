@@ -1,10 +1,21 @@
 html, body {
     height: 100%;
 }
+body{
+    font-family: 'Montserrat', sans-serif;
+}
 .centar a{
 padding: 3px;
 margin: 3px;
 }
 .noClick{
     pointer-events:  none;
+}
+.poeniNegative{
+    color: red;
+    transition: 0.4s ease-out;
+}
+.poeniPozitivno{
+    color: green;
+    transition: 0.4s ease-out;
 }

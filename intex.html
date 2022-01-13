@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
   <title>Kviz</title>
 </head>
 
@@ -17,21 +19,22 @@
   <div class="container d-flex ">
     <div class="card m-auto text-center ">
       <div class="card-body centar home">
-        <h5 class="card-title">Kviz znanja</h5>
+        <h5 class="card-title text-primary">Kviz znanja</h5>
+        <p class="poeni d-none">Poeni: 0</p>
         <p class="card-text pitanje">
           Pravila igre: <br>
           Za svaki tacan odgovor dobija se 1 poen. <br>
           Za svaki netacan odgovor gubi se 3 poena. <br>
           Pristisnite Start da zapocnete kviz!
         </p>
-        <a href="#" class="btn btn-primary q1 q d-none p-2">Button</a>
-        <a href="#" class="btn btn-primary q2 q d-none p-2">Button</a>
-        <a href="#" class="btn btn-primary q3 q d-none p-2">Button</a>
-        <a href="#" class="btn btn-primary q4 q d-none p-2">Button</a>
-        <a href="#" id="start" class="btn btn-primary p-2">Start</a>
-        <a href="#" id="start" class="btn btn-primary p-2 d-none ponovite">Ponovite test</a>
+        <a href="#" class="btn btn-primary q1 q d-none px-3 py-2 m-1">Button</a>
+        <a href="#" class="btn btn-primary q2 q d-none px-3 py-2 m-1">Button</a>
+        <a href="#" class="btn btn-primary q3 q d-none px-3 py-2 m-1">Button</a>
+        <a href="#" class="btn btn-primary q4 q d-none px-3 py-2 m-1">Button</a>
+        <a href="#" id="start" class="btn btn-primary px-3 py-2 m-1">Start</a>
+        <a href="#" id="start" class="btn btn-primary px-3 py-2 d-none ponovite">Ponovite test</a>
         <br>
-        <a href="#" class="btn btn-primary q4 next d-none p-2">Sledece pitanje</a>
+        <a href="#" class="btn btn-primary q4 next d-none px-3  py-2 m-4 next">Sledece pitanje</a>
         <div class="poljeSaPoenima">
           <br>
           <div class="input-group mb-3 d-none pisanjeNadimka">
@@ -55,8 +58,11 @@
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
+        <div class="bookmarkPolje d-none">
+
+        </div>
+      </div>    
+    </div>   
   </div>
 </body>
 <script type="text/javascript" src="data.json"></script>
