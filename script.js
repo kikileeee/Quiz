@@ -33,6 +33,7 @@ function mapiranje(x) {
 $('#start')[0].addEventListener('click', zapocniTest);
 
 function zapocniTest() {
+    
     let promesajNiz = pitanjaIOdgovori
         .map((value) => ({ value, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
@@ -49,10 +50,12 @@ function zapocniTest() {
     $('.poeni')[0].classList.remove('d-none');
     $('.bookmarkPolje')[0].classList.remove('d-none');
     $('.ime')[0].value = '';
+    
     $('.str')[brojac].classList.add('btn-primary');
     $('.str')[brojac].classList.remove('btn-outline-primary');
 
     mapiranje(promesajNiz);
+    
 };
 // Sledece pitanje
 $('.next')[0].addEventListener('click', nextFunkcija)
@@ -180,14 +183,15 @@ function loadHighScore() {
             td3.append(poeniTR);
             $('.tabelaSaPoenima')[0].append(tr);
         };
-    }
-};;
+    };
+};
 
 loadHighScore();
 
 // Bookmark
 function bookmarkLoad() {
-    for (i = 0; i < tabelaHighScore.length - 2; i++) {
+    console.log(pitanjaIOdgovori)
+    for (i = 0; i < 10; i++) {
         let a = document.createElement('a');
         a.classList.add('btn-outline-primary', 'btn', 'bookmark' + i, 'm-1', 'p-2','str');
         a.setAttribute('href', "#");
@@ -195,9 +199,9 @@ function bookmarkLoad() {
         a.append(i + 1);
         $('.bookmarkPolje')[0].append(a);
     };
-}
-bookmarkLoad();
+};
 
+bookmarkLoad();
 // klik na bookmark
 
 $('.str').click(function () {
