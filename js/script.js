@@ -187,7 +187,7 @@ loadHighScore();
 
 // Bookmark
 function bookmarkLoad() {
-    for (i = 0; i < tabelaHighScore.length - 1; i++) {
+    for (i = 0; i < tabelaHighScore.length - 2; i++) {
         let a = document.createElement('a');
         a.classList.add('btn-outline-primary', 'btn', 'bookmark' + i, 'm-1', 'p-2','str');
         a.setAttribute('href', "#");
