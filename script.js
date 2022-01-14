@@ -2,7 +2,7 @@ let pitanjaIOdgovori = [];
 let brojac = 0;
 let brojPoena = 0;
 let tabelaHighScore = JSON.parse(localStorage.getItem('tabelaHighScore')) || [];
-let nizPitanja = [];
+let proveriDaLiJeOdgovoreno = []
 
 // Baza sa pitanjima i odgovorima
 fetch('data.json')
@@ -14,7 +14,7 @@ fetch('data.json')
 function mapiranje(x) {
     $('.poeni')[0].classList.remove("poeniPozitivno", "poeniNegative");
     for (i = 1; i < 5; i++) {
-        $('.q' + i)[0].classList.remove("bg-success", "bg-danger", "border-dark", "noClick")
+        $('.q' + i)[0].classList.remove("bg-success", "bg-danger", "border-dark", "noClick", "btn-dark")
     };
     let promesanibrojevi = [1, 2, 3, 4];
     let probro = promesanibrojevi
@@ -33,14 +33,15 @@ function mapiranje(x) {
 $('#start')[0].addEventListener('click', zapocniTest);
 
 function zapocniTest() {
-    
+
+    bookmarkLoad();
+
+    proveraOdgovorenihPitanja()
     let promesajNiz = pitanjaIOdgovori
         .map((value) => ({ value, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .map(({ value }) => value);
-
     pitanjaIOdgovori = promesajNiz;
-    nizPitanja = promesajNiz;
 
     $('.q').removeClass('d-none').show();
     $('.next').removeClass('d-none').show();
@@ -50,10 +51,8 @@ function zapocniTest() {
     $('.poeni')[0].classList.remove('d-none');
     $('.bookmarkPolje')[0].classList.remove('d-none');
     $('.ime')[0].value = '';
-    
     $('.str')[brojac].classList.add('btn-primary');
     $('.str')[brojac].classList.remove('btn-outline-primary');
-
     mapiranje(promesajNiz);
     
 };
@@ -75,7 +74,7 @@ function nextFunkcija() {
     };
 };
 // provera da li je kraj kviza
-function sledeceIliKraj(){
+function sledeceIliKraj() {
     if (pitanjaIOdgovori[brojac] == undefined) {
         $('.next')[0].innerHTML = 'Zavrsni test';
     } else {
@@ -91,6 +90,13 @@ $('.q').click(function () {
     $('.q').each(function () {
         this.classList.add('noClick');
     });
+    if (proveriDaLiJeOdgovoreno[brojac - 1] == 1){
+        $('.q').each(function () {
+            this.classList.add('noClick');
+            this.classList.add("btn-dark");
+        });
+    }
+    else{
     if (URI == pitanjaIOdgovori[brojac - 1].tacanOdg) {
         element.classList.add("bg-success");
         element.classList.add("border-dark");
@@ -102,9 +108,10 @@ $('.q').click(function () {
         element.classList.add("border-dark");
         $('.poeni')[0].classList.add('poeniNegative');
         brojPoena -= 3;
-    }
-
+    }}
     $('.poeni')[0].innerHTML = 'Poeni: ' + brojPoena;
+
+    proveriDaLiJeOdgovoreno[brojac - 1] = 1
 
 });
 // Kraj Kviza
@@ -151,20 +158,16 @@ $('.unosenjeSkora').click(function () {
 
     $('.pisanjeNadimka')[0].classList.add('d-none');
 });
-
 // ponavljanje testa
-
 $('.ponovite').click(function () {
     brojac = 0;
     brojPoena = 0;
-    $('.next')[0].innerHTML = 'Sledece pitanje'  ;
+    $('.next')[0].innerHTML = 'Sledece pitanje';
     $('.poeni')[0].innerHTML = 'Poeni: 0';
     $('.ponovite')[0].classList.add('d-none');
     zapocniTest();
 });
-
 // vadjenje podataka iz localstoraga
-
 function loadHighScore() {
     tabelaHighScore.sort((a, b) => b.skor - a.skor);
     for (i = 0; i < tabelaHighScore.length; i++) {
@@ -185,29 +188,24 @@ function loadHighScore() {
         };
     };
 };
-
 loadHighScore();
-
 // Bookmark
 function bookmarkLoad() {
-    console.log(pitanjaIOdgovori)
-    for (i = 0; i < 10; i++) {
+    $('.bookmarkPolje')[0].innerHTML = ''
+    for (i = 0; i < pitanjaIOdgovori.length; i++) {
         let a = document.createElement('a');
-        a.classList.add('btn-outline-primary', 'btn', 'bookmark' + i, 'm-1', 'p-2','str');
+        a.classList.add('btn-outline-primary', 'btn', 'm-1', 'p-2', 'str');
         a.setAttribute('href', "#");
         let tekstBookmark = document.createTextNode('a');
         a.append(i + 1);
         $('.bookmarkPolje')[0].append(a);
     };
 };
-
-bookmarkLoad();
 // klik na bookmark
-
-$('.str').click(function () {
+$(document).on('click', '.str', function () {
     let element = this;
     let brojBookmark = element.innerHTML;
-    mapiranjeBookmark(nizPitanja[brojBookmark - 1]);
+    mapiranjeBookmark(pitanjaIOdgovori[brojBookmark - 1]);
     brojac = Number(brojBookmark);
     $('.str').each(function () {
         this.classList.remove('btn-primary')
@@ -217,10 +215,11 @@ $('.str').click(function () {
     element.classList.add('btn-primary');
     $('.poeni')[0].classList.remove("poeniPozitivno", "poeniNegative")
     for (i = 1; i < 5; i++) {
-        $('.q' + i)[0].classList.remove("bg-success", "bg-danger", "border-dark", "noClick")
+        $('.q' + i)[0].classList.remove("bg-success", "bg-danger", "border-dark", "noClick", "btn-dark")
     };
     sledeceIliKraj();
 })
+// mapiranje bookmarka
 function mapiranjeBookmark(x) {
     let promesanibrojevi = [1, 2, 3, 4];
     let probro = promesanibrojevi
@@ -234,3 +233,9 @@ function mapiranjeBookmark(x) {
     $('.q' + probro[2])[0].innerText = x.pogresanOdg2;
     $('.q' + probro[3])[0].innerText = x.pogresanOdg3;
 };
+// proveriDaLiJeOdgovoreno
+
+function proveraOdgovorenihPitanja() {
+    for (let i = 0; i < pitanjaIOdgovori.length; ++i) proveriDaLiJeOdgovoreno[i] = 0;
+    console.log(proveriDaLiJeOdgovoreno)
+}
