@@ -94,7 +94,6 @@ $('.q').click(function () {
     $('.q').each(function () {
         this.classList.add('noClick');
     });
-    
         if (URI == pitanjaIOdgovori[brojac - 1].tacanOdg) {
             element.classList.add("bg-success");
             element.classList.add("border-dark");
