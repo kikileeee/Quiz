@@ -54,7 +54,7 @@ function zapocniTest() {
     $('.str')[brojac].classList.add('btn-primary');
     $('.str')[brojac].classList.remove('btn-outline-primary');
     mapiranje(promesajNiz);
-    
+
 };
 // Sledece pitanje
 $('.next')[0].addEventListener('click', nextFunkcija)
@@ -65,9 +65,13 @@ function nextFunkcija() {
     else {
         mapiranje(pitanjaIOdgovori)
         $('.str').each(function () {
-            this.classList.remove('btn-primary');
-            this.classList.add('btn-outline-primary');
-        })
+            this.classList.remove('btn-primary')
+            if (this.classList.contains('btn-success') || this.classList.contains('btn-danger')) {
+            }
+            else {
+                this.classList.add('btn-outline-primary')
+            }
+        });
         $('.str')[brojac - 1].classList.add('btn-primary');
         $('.str')[brojac - 1].classList.remove('btn-outline-primary');
         sledeceIliKraj();
@@ -90,25 +94,22 @@ $('.q').click(function () {
     $('.q').each(function () {
         this.classList.add('noClick');
     });
-    if (proveriDaLiJeOdgovoreno[brojac - 1] == 1){
-        $('.q').each(function () {
-            this.classList.add('noClick');
-            this.classList.add("btn-dark");
-        });
-    }
-    else{
-    if (URI == pitanjaIOdgovori[brojac - 1].tacanOdg) {
-        element.classList.add("bg-success");
-        element.classList.add("border-dark");
-        $('.poeni')[0].classList.add('poeniPozitivno');
-        brojPoena++;
-    }
-    else {
-        element.classList.add("bg-danger");
-        element.classList.add("border-dark");
-        $('.poeni')[0].classList.add('poeniNegative');
-        brojPoena -= 3;
-    }}
+    
+        if (URI == pitanjaIOdgovori[brojac - 1].tacanOdg) {
+            element.classList.add("bg-success");
+            element.classList.add("border-dark");
+            $('.poeni')[0].classList.add('poeniPozitivno');
+            $('.str')[brojac - 1].classList.add('btn-success')
+            brojPoena++;
+        }
+        else {
+            element.classList.add("bg-danger");
+            element.classList.add("border-dark");
+            $('.poeni')[0].classList.add('poeniNegative');
+            $('.str')[brojac - 1].classList.add('btn-danger')
+            brojPoena--;
+        }
+    
     $('.poeni')[0].innerHTML = 'Poeni: ' + brojPoena;
 
     proveriDaLiJeOdgovoreno[brojac - 1] = 1
@@ -207,10 +208,16 @@ $(document).on('click', '.str', function () {
     let brojBookmark = element.innerHTML;
     mapiranjeBookmark(pitanjaIOdgovori[brojBookmark - 1]);
     brojac = Number(brojBookmark);
+
     $('.str').each(function () {
         this.classList.remove('btn-primary')
-        this.classList.add('btn-outline-primary')
+        if (this.classList.contains('btn-success') || this.classList.contains('btn-danger')) {
+        }
+        else {
+            this.classList.add('btn-outline-primary')
+        }
     });
+
     element.classList.remove('btn-outline-primary');
     element.classList.add('btn-primary');
     $('.poeni')[0].classList.remove("poeniPozitivno", "poeniNegative")
@@ -218,7 +225,12 @@ $(document).on('click', '.str', function () {
         $('.q' + i)[0].classList.remove("bg-success", "bg-danger", "border-dark", "noClick", "btn-dark")
     };
     sledeceIliKraj();
-})
+    if (proveriDaLiJeOdgovoreno[brojac - 1] == 1) {
+        $('.q').each(function () {
+            this.classList.add('noClick');
+            this.classList.add("btn-dark");
+        });
+}})
 // mapiranje bookmarka
 function mapiranjeBookmark(x) {
     let promesanibrojevi = [1, 2, 3, 4];
@@ -237,5 +249,5 @@ function mapiranjeBookmark(x) {
 
 function proveraOdgovorenihPitanja() {
     for (let i = 0; i < pitanjaIOdgovori.length; ++i) proveriDaLiJeOdgovoreno[i] = 0;
-    console.log(proveriDaLiJeOdgovoreno)
 }
+
