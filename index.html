@@ -12,35 +12,35 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-  <title>Kviz</title>
+  <title>Quiz</title>
 </head>
 
 <body class="d-flex">
   <div class="container d-flex ">
     <div class="card m-auto text-center ">
       <div class="card-body centar home">
-        <h5 class="card-title text-primary">Kviz znanja</h5>
-        <p class="poeni d-none">Poeni: 0</p>
+        <h5 class="card-title text-primary">Quiz</h5>
+        <p class="poeni d-none">Points: 0</p>
         <p class="card-text pitanje">
-          Pravila igre: <br>
-          Za svaki tacan odgovor dobija se 1 poen. <br>
-          Za svaki netacan odgovor gubi se 1 poen. <br>
-          Pristisnite Start da zapocnete kviz!
+          Rules of the game <br>
+          1 point is awarded for each correct answer. <br>
+          1 point is lost for each incorrect answer.<br>
+          Click Start to start the quiz!
         </p>
         <a href="#" class="btn btn-primary q1 q d-none px-3 py-2 m-1">Button</a>
         <a href="#" class="btn btn-primary q2 q d-none px-3 py-2 m-1">Button</a>
         <a href="#" class="btn btn-primary q3 q d-none px-3 py-2 m-1">Button</a>
         <a href="#" class="btn btn-primary q4 q d-none px-3 py-2 m-1">Button</a>
         <a href="#" id="start" class="btn btn-primary px-3 py-2 m-1">Start</a>
-        <a href="#" id="start" class="btn btn-primary px-3 py-2 d-none ponovite">Ponovite test</a>
+        <a href="#" id="start" class="btn btn-primary px-3 py-2 d-none ponovite">Try again</a>
         <br>
-        <a href="#" class="btn btn-primary q4 next d-none px-3  py-2 m-4 next">Sledece pitanje</a>
+        <a href="#" class="btn btn-primary q4 next d-none px-3  py-2 m-4 next">Next</a>
         <div class="poljeSaPoenima">
           <br>
           <div class="input-group mb-3 d-none pisanjeNadimka">
-            <input type="text" class="form-control ime" placeholder="Upisite vas nadimak">
+            <input type="text" class="form-control ime" placeholder="Enter username">
             <div class="input-group-append">
-              <button class="btn btn-primary unosenjeSkora" type="button">Unesite skor</button>
+              <button class="btn btn-primary unosenjeSkora" type="button">Enter the score</button>
             </div>
           </div>
           <br>
@@ -48,8 +48,8 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Ime</th>
-                <th scope="col">Broj Poena</th>
+                <th scope="col">Name</th>
+                <th scope="col">Number of Points</th>
               </tr>
             </thead>
             <tbody class='tabelaSaPoenima' id='tabelaSaPoenima'>

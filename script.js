@@ -98,9 +98,9 @@ function kviz() {
     // provera da li je kraj kviza
     function sledeceIliKraj() {
         if (pitanjaIOdgovori[brojac] == undefined) {
-            $('.next')[0].innerHTML = 'Zavrsni test';
+            $('.next')[0].innerHTML = 'End quiz';
         } else {
-            $('.next')[0].innerHTML = 'Sledece pitanje';
+            $('.next')[0].innerHTML = 'Next';
         }
     };
     // Provera tacnosti odgovora
@@ -127,7 +127,7 @@ function kviz() {
             brojPoena--;
         }
 
-        $('.poeni')[0].innerHTML = 'Poeni: ' + brojPoena;
+        $('.poeni')[0].innerHTML = 'Points: ' + brojPoena;
 
         proveriDaLiJeOdgovoreno[brojac - 1] = 1
 
@@ -146,11 +146,11 @@ function kviz() {
             this.classList.add('d-none');
         })
         if (brojPoena > 0) {
-            $('.pitanje')[0].innerHTML = 'Vas skor je ' + brojPoena + ' , cestitamo! </br> Mozete da ponovite test!';
+            $('.pitanje')[0].innerHTML = 'Your score is ' + brojPoena + ' , Congratulations! </br> You can repeat the test!';
             $('.pisanjeNadimka')[0].classList.remove('d-none');
         }
         else {
-            $('.pitanje')[0].innerHTML = 'Nazalost, vas skor je ' + brojPoena + ' , vise srece drugi put! </br> Mozete da ponovite test!';
+            $('.pitanje')[0].innerHTML = 'Unfortunately, your score is ' + brojPoena + ' , more luck next time! </br> You can repeat the test!';
         };
         $('.ponovite')[0].classList.remove('d-none');
     };
@@ -180,8 +180,8 @@ function kviz() {
     $('.ponovite').click(function () {
         brojac = 0;
         brojPoena = 0;
-        $('.next')[0].innerHTML = 'Sledece pitanje';
-        $('.poeni')[0].innerHTML = 'Poeni: 0';
+        $('.next')[0].innerHTML = 'Next';
+        $('.poeni')[0].innerHTML = 'Points: 0';
         $('.ponovite')[0].classList.add('d-none');
         zapocniTest();
     });
